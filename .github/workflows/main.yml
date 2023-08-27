@@ -1,23 +1,35 @@
 name: Upload File to Repository
-'on':
+
+on:
   push:
+    branches:
+      - main
+
 jobs:
   upload:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+          
       - name: Copy File to Repository
         run: |
           # Replace 'Demo.txt' with the actual file path
-          cp E://Demo.txt $GITHUB_WORKSPACE/
+          cp E:/Demo.txt $GITHUB_WORKSPACE/
+      
+      - name: List Files in Workspace
+        run: |
+          ls $GITHUB_WORKSPACE
+
       - name: Commit Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
           git commit -m "Upload file via GitHub Action"
+      
       - name: Push Changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          github_token: '${{ secrets.GITHUB_TOKEN }}'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
