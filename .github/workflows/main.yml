@@ -12,7 +12,7 @@ jobs:
       - name: Copy File to Repository
         run: |
           # Replace 'Demo.txt' with the actual file path
-          cp E:/Demo.txt $GITHUB_WORKSPACE/
+          cp E://Demo.txt $GITHUB_WORKSPACE/
       - name: Commit Changes
         run: |
           git config --local user.email "action@github.com"
