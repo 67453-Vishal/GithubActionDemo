@@ -1,8 +1,6 @@
 name: Upload File to Repository
 'on':
   push:
-    branches:
-      - main
 jobs:
   upload:
     runs-on: ubuntu-latest
