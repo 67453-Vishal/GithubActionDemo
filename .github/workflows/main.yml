@@ -1,35 +1,26 @@
-name: Upload File to Repository
+name: Copy Demo File
 
-on:
-  push:
-    branches:
-      - main
+on: [push]
 
 jobs:
-  upload:
+  copy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-          
-      - name: Copy File to Repository
-        run: |
-          mkdir $GITHUB_WORKSPACE/uploaded_files
-          cp E:/Demo.txt $GITHUB_WORKSPACE/uploaded_files/
-      
-      - name: List Files in Workspace
-        run: |
-          ls $GITHUB_WORKSPACE/uploaded_files
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Commit Changes
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add uploaded_files/
-          git commit -m "Upload file via GitHub Action"
-      
-      - name: Push Changes
-        uses: ad-m/github-push-action@v0.6.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: Copy demo.txt
+      run: cp E:/demo.txt ${{ github.workspace }}/demo.txt
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        git commit -m "Auto-commit: Copy demo.txt"
+        
+    - name: Push changes
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
