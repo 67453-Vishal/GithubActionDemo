@@ -1,6 +1,10 @@
 name: Upload File to Repository
 
-on: push
+on:
+  push:
+    branches:
+      - main
+
 jobs:
   upload:
     runs-on: ubuntu-latest
@@ -11,18 +15,18 @@ jobs:
           
       - name: Copy File to Repository
         run: |
-          # Replace 'Demo.txt' with the actual file path
-          cp E:/Demo.txt $GITHUB_WORKSPACE/
+          mkdir $GITHUB_WORKSPACE/uploaded_files
+          cp E:/Demo.txt $GITHUB_WORKSPACE/uploaded_files/
       
       - name: List Files in Workspace
         run: |
-          ls $GITHUB_WORKSPACE
+          ls $GITHUB_WORKSPACE/uploaded_files
 
       - name: Commit Changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
+          git add uploaded_files/
           git commit -m "Upload file via GitHub Action"
       
       - name: Push Changes
