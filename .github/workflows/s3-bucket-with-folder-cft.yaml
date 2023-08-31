@@ -1,0 +1,18 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Create an S3 bucket with a simulated folder
+
+Resources:
+  MyS3Bucket:
+    Type: 'AWS::S3::Bucket'
+    Properties:
+      BucketName: s3bucketcftfromvishal
+
+  MyFolderObject:
+    Type: 'AWS::S3::Object'
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      Key: myfolder/
+
+Outputs:
+  BucketName:
+    Value: !Ref MyS3Bucket
