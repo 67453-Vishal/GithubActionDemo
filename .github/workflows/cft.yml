@@ -5,4 +5,5 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: firsts3bucketofcftbyvishaltheadishakti
+      BucketName: firsts3bucketofcftbyvishaltheadishakti1
+
