@@ -1,1 +1,33 @@
-hello i am diksha hii
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create an S3 bucket with a "folder"
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: firsts3bucketwithfolderusingcftbyvishal
+      AccessControl: Private
+
+  MyS3FolderObject:
+    Type: AWS::S3::Object
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      Key: my-folder/
+
+  MyS3BucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      PolicyDocument:
+        Statement:
+          - Sid: AllowFolderAccess
+            Effect: Allow
+            Principal: "*"
+            Action:
+              - s3:GetObject
+            Resource:
+              Fn::Join:
+                - ""
+                - - "arn:aws:s3:::"
+                  - !Ref MyS3Bucket
+                  - "/my-folder/*"
