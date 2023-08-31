@@ -5,5 +5,5 @@ Resources:
   MyS3Bucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: s3bucketbyvishaltheadishakti213
+      BucketName: s3bucketbyvishaltheadishakti123
 

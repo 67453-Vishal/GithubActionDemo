@@ -15,7 +15,7 @@ jobs:
       - name: Deploy CloudFormation stack
         run: |
           aws cloudformation deploy \
-            --stack-name vishal3 \
+            --stack-name vishal5 \
             --template-file .github/workflows/cft.yml \
             --capabilities CAPABILITY_NAMED_IAM
         env:
@@ -26,7 +26,9 @@ jobs:
 
       - name: Upload to S3
         run: |
-          aws s3 cp .github/workflows/hingu.txt s3://s3bucketbyvishaltheadishakti213/
+          aws s3 cp .github/workflows/hingu.txt s3://s3bucketbyvishaltheadishakti123/
+          aws s3 cp .github/workflows/aditya.txt s3://s3bucketbyvishaltheadishakti123/
+          aws s3 cp .github/workflows/Vivek.txt s3://s3bucketbyvishaltheadishakti123/
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
