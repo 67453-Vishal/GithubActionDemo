@@ -1,4 +1,4 @@
-name: combine1
+name: Deploy Yelp Stack
 
 on:
   push:
@@ -12,26 +12,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+
       - name: Deploy CloudFormation stack
         run: |
           aws cloudformation deploy \
-            --stack-name vishal5 \
-            --template-file .github/workflows/cft.yml \
+            --stack-name yelpresource \
+            --template-file .github/workflows/TrialCFT2.yml \
             --capabilities CAPABILITY_NAMED_IAM
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_DEFAULT_REGION: us-east-1
           AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
 
-      - name: Upload to S3
-        run: |
-          aws s3 cp .github/workflows/hingu.txt s3://s3bucketbyvishaltheadishakti12345/
-          aws s3 cp .github/workflows/Aditya.txt s3://s3bucketbyvishaltheadishakti12345/
-          aws s3 cp .github/workflows/Vivek.txt s3://s3bucketbyvishaltheadishakti12345/
+      - name: Dump data to S3
+        run: aws s3 cp s3://yelp-raw-data/ s3://yelp-input-data-g3/ --recursive # Check this path
+
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+          AWS_DEFAULT_REGION: us-east-1
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}   
+      
       
